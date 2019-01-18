@@ -127,8 +127,3 @@ module.exports = {
     postRecibo,
     getNombre
 };
-
-getNombre(1, (err, cliente) => {
-    console.log(cliente);
-
-})

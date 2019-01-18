@@ -48,7 +48,6 @@ app.get('/pagos/:id', (req, res) => {
 app.post('/pagos/:id', (req, res) => {
     let id = req.params.id;
     let b = req.body;
-    // let caja = new Caja(b.doc, b.en, b.de, b.ta, b.re, b.con);
 
     funciones.getTot(id, (err, factura) => {
         if (err) {
@@ -63,9 +62,20 @@ app.post('/pagos/:id', (req, res) => {
                 message: 'No hay Saldo',
                 Saldo: factura.Saldo_Factura
             });
-        } else {
-            let caja = new Caja(b.doc, b.fac, b.cli, b.en, b.de, b.ta, b.re, b.con);
+        }
+        let idcliente = factura.idcliente;
+        let fat = factura.documento;
+        funciones.getNombre(idcliente, (err, nombre) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    message: 'Error' + err
+                });
+            }
 
+
+            let caja = new Caja(b.doc, fat, nombre, b.en, b.de, b.ta, b.re, b.con);
+            console.log('caja', caja);
 
             funciones.postcaja(caja, factura.Saldo_Factura, (err, idcaja) => {
                 if (err) {
@@ -75,6 +85,8 @@ app.post('/pagos/:id', (req, res) => {
                     });
                 }
                 let recibo = new Recibo(id, b.en, b.respo, b.doc, idcaja, b.paga, factura.idcliente);
+                console.log('recibo', recibo);
+
                 funciones.postRecibo(recibo, idcaja, (err, reciboenviado) => {
                     if (err) {
                         return res.status(400).json({
@@ -90,7 +102,8 @@ app.post('/pagos/:id', (req, res) => {
                     }
                 });
             });
-        }
+        });
+
 
     });
 });

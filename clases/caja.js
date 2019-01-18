@@ -1,8 +1,8 @@
 class Caja {
-    constructor(documento, docfactura, nomcliente, entrada, destino, tarjeta, ref, salida = 0) {
+    constructor(documento, docfactura, nomcliente, entrada, destino, tarjeta, ref, salida = 0, fecha = new Date()) {
         this.documento = documento;
-        this.fecha = new Date();
-        this.concepto = `Pago a cuenta Fact N°${docfactura} de ${nomcliente}`;
+        this.fecha = fecha;
+        this.concepto = `Pago a Cuenta Fact N°${docfactura} de ${nomcliente}`;
         this.entrada = entrada;
         this.salida = salida;
         this.moneda = "S/";
