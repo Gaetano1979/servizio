@@ -8,7 +8,7 @@ const { Caja } = require('../../../clases/caja');
 
 
 
-
+// ruta get todos los pagos
 app.get('/pagos', (req, res) => {
 
     let peticion = `select * from pagos `;
@@ -28,13 +28,14 @@ app.get('/pagos', (req, res) => {
     });
 });
 
+// ruta get pagos por id factura
 app.get('/pagos/:id', (req, res) => {
     let id = req.params.id;
     funciones.getTot(id, (err, factura) => {
         if (err) {
-            res.status(400).json({
+            return res.status(400).json({
                 ok: false,
-                message: 'Error' + err
+                message: 'Error ' + err
             });
         } else {
             res.status(200).json({

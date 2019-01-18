@@ -10,6 +10,7 @@ let get_factura = (id, callback) => {
         return callback('Erorr en el Id');
     }
     mysql.conessione.query(query, (err, factura) => {
+        if (factura.length === 0) return callback(`No hay una factura con este id`);
         if (err) {
             return callback('Error', err);
         } else {
@@ -39,6 +40,7 @@ let get_recibos = (idfattura, callback) => {
 
 let getTot = (id, callback) => {
     get_factura(id, (err, factura) => {
+        if (!factura) return callback(`No hay factura con  este id: ${id}`);
 
         if (err) {
             return callback('error', err);
