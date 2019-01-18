@@ -29,20 +29,69 @@ let MysqlChiuso = () => {
 let MysqlQuery = (query, callback) => {
     MysqlAperto();
     conessione.query(query, (err, resultado) => {
-        // console.log(query);
         if (err) {
-            // console.log(err);
             return callback(err);
         }
         if (resultado.length === 0) {
             return callback('Registro no encontrado');
-
         } else {
             console.log('resultados enviados');
             return callback(null, resultado);
         }
     });
     MysqlChiuso();
+};
+let MysqlGetDatosCliente = (id, callback) => {
+
+    conessione.query(`select * from ventas where idcliente=${id} `, (err, resultado) => {
+        if (resultado == 0) {
+            return callback('no hay ventas por este cliente');
+        } else {
+
+            conessione.query(`select * from pagos where idcliente=${id} `, (err, primitivo) => {
+
+                let arrDoc = [];
+                let Doc;
+
+                resultado.forEach(element => {
+                    let pagamenti = 0;
+                    let recibos = [];
+
+                    primitivo.find(pagos => {
+
+                        if (pagos.idfactura === element.idfactura) {
+                            pagamenti += pagos.cantidad;
+                            let ob = {
+                                pago: pagos.cantidad,
+                                resposable: pagos.responsable,
+                                fecha: pagos.fecha_pag,
+                                recibo: pagos.documento
+                            };
+                            recibos.push(ob);
+                        }
+                    });
+                    Doc = {
+                        Id_Factura: element.idfactura,
+                        Tipo: element.tipodoc,
+                        Documento: element.documento,
+                        Fecha_factura: element.fecha,
+                        Recibos: recibos,
+                        Cancelado: pagamenti,
+                        Total_Factura: element.total,
+                        Saldo: (element.total - pagamenti)
+                    };
+                    arrDoc.push(Doc);
+                });
+
+                if (primitivo.length === 0) {
+                    return callback('no hay cobranza por este cliente');
+                } else {
+                    return callback(null, arrDoc);
+
+                }
+            });
+        }
+    });
 };
 
 
@@ -51,5 +100,6 @@ module.exports = {
     conessione,
     MysqlAperto,
     MysqlChiuso,
-    MysqlQuery
+    MysqlQuery,
+    MysqlGetDatosCliente
 };

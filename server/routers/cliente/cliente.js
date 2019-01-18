@@ -4,8 +4,10 @@ const mysql = require('../../../mysql/mysql');
 
 
 
+
+
+// ruta de todos los clientes
 app.get('/cliente', (req, res) => {
-    // let con = mysql.MysqlAperto();
 
     let peticion = `select * from clientes `;
 
@@ -22,8 +24,21 @@ app.get('/cliente', (req, res) => {
             });
         }
     });
-
-    // mysql.MysqlChiuso();
+});
+// ruta del cliente con id especifico
+app.get('/cliente/:id', (req, res) => {
+    let id = req.params.id;
+    mysql.MysqlGetDatosCliente(id, (err, data) => {
+        if (err) {
+            res.json({
+                err
+            });
+        } else {
+            res.json({
+                data
+            });
+        }
+    });
 });
 
 
