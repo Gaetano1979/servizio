@@ -27,7 +27,7 @@ let MysqlChiuso = () => {
     });
 };
 let MysqlQuery = (query, callback) => {
-    MysqlAperto();
+    // MysqlAperto();
     conessione.query(query, (err, resultado) => {
         if (err) {
             return callback(err);
@@ -39,7 +39,7 @@ let MysqlQuery = (query, callback) => {
             return callback(null, resultado);
         }
     });
-    MysqlChiuso();
+    // MysqlChiuso();
 };
 let MysqlGetDatosCliente = (id, callback) => {
 

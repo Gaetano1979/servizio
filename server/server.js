@@ -7,11 +7,15 @@ const body_parser = require('body-parser');
 
 const cors = require('cors');
 
+const mysql = require('../mysql/mysql');
+
 
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(body_parser.json());
 
 app.use(cors());
+
+let apertura = mysql.MysqlAperto();
 
 app.use(require('./routers/index'));
 
