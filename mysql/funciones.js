@@ -120,6 +120,28 @@ let getNombre = (id, callback) => {
     });
 };
 
+let getUsuario = (query, callback) => {
+    mysql.conessione.query(query, (err, usuario) => {
+        if (err) {
+            return callback('Error ', err);
+        } else {
+            return callback(null, usuario);
+        }
+    });
+};
+
+let postUsuario = (usuario, callback) => {
+
+    mysql.conessione.query(`insert into usuario set ?`, usuario, (err, result) => {
+        if (err) {
+            return callback('Error ', err)
+        } else {
+            return callback(null, result)
+        }
+    });
+
+};
+
 
 module.exports = {
     get_factura,
@@ -127,5 +149,7 @@ module.exports = {
     getTot,
     postcaja,
     postRecibo,
-    getNombre
+    getNombre,
+    getUsuario,
+    postUsuario
 };
