@@ -37,6 +37,21 @@ app.post('/usuario', (req, res) => {
         }
     });
 });
+app.delete('/usuario/:id', (req, res) => {
+    let id = req.params.id;
+    funciones.deleteUsuario(id, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                err
+            });
+        } else {
+            res.status(200).json({
+                ok: true,
+                data
+            });
+        }
+    });
+});
 
 
 
