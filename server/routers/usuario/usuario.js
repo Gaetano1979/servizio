@@ -24,7 +24,7 @@ app.get('/usuario', (req, res) => {
 
 app.post('/usuario', (req, res) => {
     let b = req.body;
-    let usuario = new Usuario(b.nombre, b.apellido);
+    let usuario = new Usuario(b.nombre, b.apellido, b.roule, b.fecha);
     funciones.postUsuario(usuario, (err, result) => {
         if (err) {
             return res.status(400).json({
