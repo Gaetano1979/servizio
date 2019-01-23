@@ -29,7 +29,7 @@ let deleteUsuario = (id, callback) => {
 
     mysql.conessione.query(`delete from usuario where idusuario=${id} `, (err, data) => {
         if (err) {
-            return callback('Error ', err)
+            return callback('Error ', err);
         } else {
             return callback(null, data);
         }
@@ -144,9 +144,9 @@ let postUsuario = (usuario, callback) => {
 
     mysql.conessione.query(`insert into usuario set ?`, usuario, (err, result) => {
         if (err) {
-            return callback('Error ', err)
+            return callback('Error ', err);
         } else {
-            return callback(null, result)
+            return callback(null, result);
         }
     });
 

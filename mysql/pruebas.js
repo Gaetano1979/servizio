@@ -126,6 +126,9 @@ let prova1 = (callback) => {
                         comp_tot: tot,
                         pagoTot: patot,
                         cliente: cl.cliente,
+                        ciudad: cl.ciudad,
+                        zona: cl.zona,
+                        direccion: cl.direccion,
                         fatturas: fatt,
                         pagamenti: pag
                     };
