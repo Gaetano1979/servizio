@@ -45,7 +45,7 @@ app.get('/pagos/:id', (req, res) => {
         }
     });
 });
-
+// ruta post por ingresar un recibo nuevo 
 app.post('/pagos/:id', (req, res) => {
     let id = req.params.id;
     let b = req.body;

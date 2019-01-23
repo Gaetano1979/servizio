@@ -43,21 +43,21 @@ let MysqlQuery = (query, callback) => {
 };
 let MysqlGetDatosCliente = (id, callback) => {
 
-    conessione.query(`select * from ventas where idcliente=${id} `, (err, resultado) => {
-        if (resultado == 0) {
+    conessione.query(`select * from ventas where idcliente=${id} `, (err, fatturas_cliente) => {
+        if (fatturas_cliente == 0) {
             return callback('no hay ventas por este cliente');
         } else {
 
-            conessione.query(`select * from pagos where idcliente=${id} `, (err, primitivo) => {
+            conessione.query(`select * from pagos where idcliente=${id} `, (err, pagamenti_cliente) => {
 
                 let arrDoc = [];
                 let Doc;
 
-                resultado.forEach(element => {
+                fatturas_cliente.forEach(element => {
                     let pagamenti = 0;
                     let recibos = [];
 
-                    primitivo.find(pagos => {
+                    pagamenti_cliente.find(pagos => {
 
                         if (pagos.idfactura === element.idfactura) {
                             pagamenti += pagos.cantidad;
@@ -83,7 +83,7 @@ let MysqlGetDatosCliente = (id, callback) => {
                     arrDoc.push(Doc);
                 });
 
-                if (primitivo.length === 0) {
+                if (pagamenti_cliente.length === 0) {
                     return callback('no hay cobranza por este cliente');
                 } else {
                     return callback(null, arrDoc);

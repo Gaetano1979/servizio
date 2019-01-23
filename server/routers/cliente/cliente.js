@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mysql = require('../../../mysql/mysql');
+const prova = require('../../../mysql/pruebas');
 
 
 
@@ -38,6 +39,22 @@ app.get('/cliente/:id', (req, res) => {
                 data
             });
         }
+    });
+});
+app.get('/clienteTot', (req, res) => {
+    prova.prova1((err, resultado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: err
+            });
+        } else {
+            return res.status(200).json({
+                ok: true,
+                data: resultado
+            })
+        }
+
     });
 });
 
