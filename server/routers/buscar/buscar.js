@@ -4,7 +4,7 @@ const mysql = require('../../../mysql/mysql');
 const prova = require('../../../mysql/pruebas');
 
 app.get('/buscar', (req, res) => {
-    let termino = req.body.termino;
+    let termino = req.header.termino;
     mysql.conessione.query(`select * from clientes where cliente like '%${termino}%'`, (err, resultado) => {
         if (err) {
             return res.status(400).json({
