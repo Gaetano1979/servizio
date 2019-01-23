@@ -52,7 +52,7 @@ app.get('/clienteTot', (req, res) => {
             return res.status(200).json({
                 ok: true,
                 data: resultado
-            })
+            });
         }
 
     });

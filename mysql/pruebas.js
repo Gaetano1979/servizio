@@ -86,7 +86,10 @@ let prova1 = (callback) => {
         if (err) return callback(err);
         mysql.conessione.query(`select * from pagos`, (err, pagos) => {
             if (err) return callback(err);
+            if (pagos.length === 0) return callback('No hay cobranza por este cliente');
             mysql.conessione.query(`select * from ventas`, (err, fatturas) => {
+                if (err) return callback(err);
+                if (fatturas.length === 0) return callback('No hay fatturas por este cliente');
 
                 let resToto = [];
                 let res;
@@ -103,7 +106,7 @@ let prova1 = (callback) => {
                                 res: pa.responsable,
                                 can: pa.cantidad,
                                 fatt: pa.idfactura
-                            })
+                            });
                         }
                     });
                     fatturas.find(fa => {
@@ -113,17 +116,18 @@ let prova1 = (callback) => {
                                 id: fa.idfactura,
                                 fecha: fa.fecha,
                                 tot: fa.total
-                            })
+                            });
                         }
                     });
 
                     res = {
                         id: cl.idcliente,
+                        saldo: (tot - patot),
+                        comp_tot: tot,
+                        pagoTot: patot,
                         cliente: cl.cliente,
                         fatturas: fatt,
-                        pagamenti: pag,
-                        comp_tot: tot,
-                        pagoTot: patot
+                        pagamenti: pag
                     };
                     resToto.push(res);
 
@@ -133,7 +137,7 @@ let prova1 = (callback) => {
 
                 });
                 return callback(null, resToto);
-            })
+            });
 
 
         });
@@ -162,4 +166,4 @@ let prova1 = (callback) => {
 // });
 module.exports = {
     prova1
-}
+};
