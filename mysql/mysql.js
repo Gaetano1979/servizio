@@ -76,7 +76,7 @@ let MysqlGetDatosCliente = (id, callback) => {
                         Documento: element.documento,
                         Fecha_factura: element.fecha,
                         Recibos: recibos,
-                        Cancelado: pagamenti,
+                        Cancelado: Number(pagamenti),
                         Total_Factura: element.total,
                         Saldo: (element.total - pagamenti)
                     };

@@ -122,9 +122,9 @@ let prova1 = (callback) => {
 
                     res = {
                         id: cl.idcliente,
-                        saldo: (tot - patot.toPrecision(7)),
+                        saldo: Number(((tot) - (patot)).toPrecision(6)),
                         comp_tot: tot,
-                        pagoTot: patot.toPrecision(6),
+                        pagoTot: Number(patot.toPrecision(8)),
                         cliente: cl.cliente,
                         ciudad: cl.ciudad,
                         zona: cl.zona,
