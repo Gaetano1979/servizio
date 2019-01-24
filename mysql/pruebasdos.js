@@ -53,7 +53,7 @@ let prova1 = (callback) => {
                                 notcl.push({
                                     fattura: no.factura,
                                     numero_nota: no.documento,
-                                    monto_nota_credito: (no.total).toFixed(2)
+                                    monto_nota_credito: Number((no.total).toFixed(2))
                                 });
 
                             }
