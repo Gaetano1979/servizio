@@ -75,8 +75,8 @@ let getTot = (id, callback) => {
                     fecha_documento: factura.fecha,
                     documento: factura.documento,
                     Totale_Fattura: factura.total,
-                    Totale_Recibos: monto,
-                    Saldo_Factura: Saldo,
+                    Totale_Recibos: monto.toFixed(2),
+                    Saldo_Factura: Saldo.toFixed(2),
                     recibos: recibos
                 });
             }
