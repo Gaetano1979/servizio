@@ -44,7 +44,7 @@ let MysqlQuery = (query, callback) => {
 let MysqlGetDatosCliente = (id, callback) => {
 
     conessione.query(`select * from ventas where idcliente=${id} `, (err, fatturas_cliente) => {
-        if (fatturas_cliente == 0) {
+        if (fatturas_cliente === 0) {
             return callback('no hay ventas por este cliente');
         } else {
 
@@ -70,7 +70,7 @@ let MysqlGetDatosCliente = (id, callback) => {
                             recibos.push(ob);
                         }
                     });
-                    let SaldoTot = (element.total - pagamenti);
+                    let SaldoTot = (element.total - pagamenti - element.inicial);
                     Doc = {
                         Id_Factura: element.idfactura,
                         Tipo: element.tipodoc,
@@ -79,7 +79,8 @@ let MysqlGetDatosCliente = (id, callback) => {
                         Recibos: recibos,
                         Cancelado: Number(pagamenti.toFixed(2)),
                         Total_Factura: element.total,
-                        Saldo: SaldoTot.toFixed(2)
+                        Saldo: Number(SaldoTot.toFixed(2)),
+                        Inicial: element.inicial
                     };
                     arrDoc.push(Doc);
                 });

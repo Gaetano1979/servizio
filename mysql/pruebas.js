@@ -115,7 +115,8 @@ let prova1 = (callback) => {
                             fatt.push({
                                 id: fa.idfactura,
                                 fecha: fa.fecha,
-                                tot: fa.total
+                                tot: fa.total,
+                                inicial: fa.inicial
                             });
                         }
                     });
