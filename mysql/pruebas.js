@@ -98,6 +98,7 @@ let prova1 = (callback) => {
                     let fatt = [];
                     let pag = [];
                     let tot = 0;
+                    let iniz = 0;
                     pagos.find(pa => {
                         if (pa.idcliente === cl.idcliente) {
                             patot += pa.cantidad;
@@ -112,6 +113,7 @@ let prova1 = (callback) => {
                     fatturas.find(fa => {
                         if (fa.idcliente === cl.idcliente) {
                             tot += fa.total;
+                            iniz += fa.inicial;
                             fatt.push({
                                 id: fa.idfactura,
                                 fecha: fa.fecha,
@@ -126,6 +128,7 @@ let prova1 = (callback) => {
                         saldo: Number(((tot) - (patot)).toPrecision(6)),
                         comp_tot: Number(tot.toFixed(2)),
                         pagoTot: Number(patot.toFixed(2)),
+                        inicial: Number(iniz),
                         cliente: cl.cliente,
                         ciudad: cl.ciudad,
                         zona: cl.zona,
