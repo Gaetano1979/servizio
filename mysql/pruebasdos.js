@@ -136,17 +136,17 @@ let MysqlGetDatosCliente2 = (id, callback) => {
                             });
                             let SaldoTot = (element.total - pagamenti - element.inicial - totNotas);
                             Doc = {
+                                Saldo: Number(SaldoTot.toFixed(2)),
                                 Id_Factura: element.idfactura,
+                                Cancelado: Number(pagamenti.toFixed(2)),
+                                Total_Factura: element.total,
+                                Total_Notas: Number(totNotas),
                                 Tipo: element.tipodoc,
                                 Documento: element.documento,
                                 Fecha_factura: element.fecha,
                                 Recibos: recibos,
                                 Notas: nota_cre,
-                                Inicial: element.inicial,
-                                Cancelado: Number(pagamenti.toFixed(2)),
-                                Total_Notas: Number(totNotas),
-                                Total_Factura: element.total,
-                                Saldo: Number(SaldoTot.toFixed(2))
+                                Inicial: element.inicial
                             };
                             arrDoc.push(Doc);
                         });
