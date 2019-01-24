@@ -137,40 +137,14 @@ let prova1 = (callback) => {
                         pagamenti: pag
                     };
                     resToto.push(res);
-
-
                     // console.log('=======================');
-
-
                 });
                 return callback(null, resToto);
             });
-
-
         });
     });
 };
 
-// prova1((err, cliente) => {
-//     if (err) {
-//         console.log(err);
-
-//     } else {
-//         console.log(cliente);
-
-//     }
-// });
-
-// Mysql_prova(6, (err, resultado) => {
-//     if (err) {
-//         console.log(err);
-
-//     } else {
-//         console.log(resultado);
-
-
-//     }
-// });
 module.exports = {
     prova1
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mysql = require('../../../mysql/mysql');
-const prova = require('../../../mysql/pruebas');
+const prova = require('../../../mysql/pruebasdos');
 
 
 
@@ -29,7 +29,7 @@ app.get('/cliente', (req, res) => {
 // ruta del cliente con id especifico
 app.get('/cliente/:id', (req, res) => {
     let id = req.params.id;
-    mysql.MysqlGetDatosCliente(id, (err, data) => {
+    prova.MysqlGetDatosCliente2(id, (err, data) => {
         if (err) {
             res.json({
                 err
