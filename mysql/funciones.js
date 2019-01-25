@@ -132,6 +132,7 @@ let getNombre = (id, callback) => {
 
 let getUsuario = (query, callback) => {
     mysql.conessione.query(query, (err, usuario) => {
+        if (!usuario) return callback('No hemos recibidos Usuarios');
         if (err) {
             return callback('Error ', err);
         } else {

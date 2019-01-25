@@ -95,7 +95,7 @@ let MysqlGetDatosCliente2 = (id, callback) => {
 
             mysql.conessione.query(`select * from pagos where idcliente=${id} `, (err, pagamenti_cliente) => {
                 if (err) {
-                    return callback('Error ', err)
+                    return callback('Error ', err);
                 } else {
                     mysql.conessione.query(`select * from notas where idcliente=${id}`, (err, notas) => {
 
@@ -131,7 +131,7 @@ let MysqlGetDatosCliente2 = (id, callback) => {
                                         total_nota: _totNota,
                                         fattura_n: not.factura
                                     };
-                                    nota_cre.push(notas)
+                                    nota_cre.push(notas);
                                 }
                             });
                             let SaldoTot = (element.total - pagamenti - element.inicial - totNotas);
@@ -157,7 +157,7 @@ let MysqlGetDatosCliente2 = (id, callback) => {
                             return callback(null, arrDoc);
 
                         }
-                    })
+                    });
                 }
 
             });
@@ -168,4 +168,4 @@ let MysqlGetDatosCliente2 = (id, callback) => {
 module.exports = {
     prova1,
     MysqlGetDatosCliente2
-}
+};
