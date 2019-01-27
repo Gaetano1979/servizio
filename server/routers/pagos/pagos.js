@@ -120,7 +120,8 @@ app.post('/recibo', (req, res) => {
     let body = req.body;
     // let recibo = new Recibo(body.id, body.cantidad, body.responsable, body.documento, body.idcaja, body.paga_con, body.idcliente);
     let recibo = {
-        id: body.id
+        id: body.id,
+        documento: body.documento
     }
     funciones.checkRecibo(recibo, (err, resultado) => {
         if (err) {
@@ -131,6 +132,7 @@ app.post('/recibo', (req, res) => {
             res.status(200).json({
                 ok: true,
                 resultado,
+                recibo,
                 body
             });
         }
