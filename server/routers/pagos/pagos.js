@@ -130,7 +130,8 @@ app.post('/recibo', (req, res) => {
         } else {
             res.status(200).json({
                 ok: true,
-                resultado
+                resultado,
+                body
             });
         }
     });
