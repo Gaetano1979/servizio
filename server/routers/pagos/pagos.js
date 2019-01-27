@@ -118,9 +118,10 @@ app.post('/pagos/:id', (req, res) => {
 app.post('/recibo', (req, res) => {
     // let id = req.params.id;
     let body = req.body;
+    let id = body.id;
     // let recibo = new Recibo(body.id, body.cantidad, body.responsable, body.documento, body.idcaja, body.paga_con, body.idcliente);
     let recibo = {
-        id: body.id,
+        id,
         documento: body.documento
     }
     funciones.checkRecibo(recibo, (err, resultado) => {
