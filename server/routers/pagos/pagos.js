@@ -47,6 +47,7 @@ app.get('/pagos/:id', (req, res) => {
 });
 // ruta post por ingresar un recibo nuevo 
 app.post('/pagos/:id', (req, res) => {
+    // recibe id factura
     let id = req.params.id;
     let b = req.body;
 
@@ -75,7 +76,7 @@ app.post('/pagos/:id', (req, res) => {
             }
 
 
-            let caja = new Caja(b.doc, fat, nombre, b.en, b.de, b.ta, b.re, b.con);
+            let caja = new Caja(b.documento, fat, nombre, b.entrada, b.destino, b.tarjeta, b.ref_tarjeta, 0, b.fecha);
             console.log('caja', caja);
 
             funciones.postcaja(caja, factura.Saldo_Factura, (err, idcaja) => {
@@ -85,7 +86,7 @@ app.post('/pagos/:id', (req, res) => {
                         message: 'Error ' + err
                     });
                 }
-                let recibo = new Recibo(id, b.en, b.respo, b.doc, idcaja, b.paga, factura.idcliente);
+                let recibo = new Recibo(id, b.entrada, b.responsable, b.documento, idcaja, b.paga_con, factura.idcliente);
                 console.log('recibo', recibo);
 
                 funciones.postRecibo(recibo, idcaja, (err, reciboenviado) => {
