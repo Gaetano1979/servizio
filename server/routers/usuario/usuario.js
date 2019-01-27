@@ -32,6 +32,7 @@ app.post('/usuario', (req, res) => {
             });
         } else {
             res.status(200).json({
+                usuario,
                 result
             });
         }
