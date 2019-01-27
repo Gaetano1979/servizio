@@ -165,9 +165,9 @@ let checkRecibo = (recibo, callback) => {
     return callback(null, {
         ok: true,
         recibo
-    })
+    });
 
-}
+};
 
 
 module.exports = {
