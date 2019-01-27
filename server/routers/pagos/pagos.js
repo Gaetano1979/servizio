@@ -123,21 +123,24 @@ app.post('/recibo', (req, res) => {
     let recibo = {
         id,
         documento: body.documento
-    }
-    funciones.checkRecibo(recibo, (err, resultado) => {
-        if (err) {
-            res.status(400).json({
-                err
-            });
-        } else {
-            res.status(200).json({
-                ok: true,
-                resultado,
-                recibo,
-                body
-            });
-        }
+    };
+    res.json({
+        recibo
     });
+    // funciones.checkRecibo(recibo, (err, resultado) => {
+    //     if (err) {
+    //         res.status(400).json({
+    //             err
+    //         });
+    //     } else {
+    //         res.status(200).json({
+    //             ok: true,
+    //             resultado,
+    //             recibo,
+    //             body
+    //         });
+    //     }
+    // });
 });
 
 
