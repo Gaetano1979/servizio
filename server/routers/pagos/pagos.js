@@ -93,7 +93,10 @@ app.post('/pagos/:id', (req, res) => {
                     if (err) {
                         return res.status(400).json({
                             ok: false,
-                            message: 'Error ' + err
+                            message: 'Error ' + err,
+                            idcaja,
+                            caja,
+                            recibo
                         });
                     } else {
                         res.status(200).json({
