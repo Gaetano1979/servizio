@@ -76,7 +76,7 @@ app.post('/pagos/:id', (req, res) => {
             }
 
 
-            let caja = new Caja(b.documento, fat, nombre, b.entrada, b.destino, b.tarjeta, b.ref_tarjeta, 0, b.fecha);
+            let caja = new Caja(b.documento, fat, nombre, b.entrada, "", "", "", 0);
             console.log('caja', caja);
 
             funciones.postcaja(caja, factura.Saldo_Factura, (err, idcaja) => {
@@ -99,6 +99,8 @@ app.post('/pagos/:id', (req, res) => {
                         res.status(200).json({
                             ok: true,
                             message: 'Recibo enviado',
+                            recibo,
+                            caja,
                             reciboenviado
                         });
                     }
