@@ -115,7 +115,7 @@ app.post('/pagos/:id', (req, res) => {
     });
 });
 
-app.post('/recibo/:id', (req, res) => {
+app.post('/recibo', (req, res) => {
     let id = req.params.id;
     let body = req.body;
     let recibo = new Recibo(id, body.cantidad, body.responsable, body.documento, body.idcaja, body.paga_con, body.idcliente);
