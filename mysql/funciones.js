@@ -107,8 +107,12 @@ let postcaja = (caja, saldo, callback) => {
 };
 
 let postRecibo = (recibo, idcaja, callback) => {
-    if (!recibo) return callback('ingresar recibo');
-    if (!idcaja) return callback('Manca el Id de la caja');
+    if (!recibo.cantidad) return callback('manca la cantidad');
+    if (!recibo.documento) return callback('manca il documento');
+    if (!recibo.responsable) return callback('manca il responsable');
+    if (!recibo.idcliente) return callback('manca il idcliente');
+    if (!recibo.paga_con) return callback('manca il paga_con');
+    if (!recibo.idcaja) return callback('manca il idcaja');
     mysql.conessione.query(`insert into pagos set ?`, recibo, (err, data) => {
         if (err) {
             return callback('Error post recibo', err);
@@ -150,8 +154,20 @@ let postUsuario = (usuario, callback) => {
             return callback(null, result);
         }
     });
-
 };
+let checkRecibo = (recibo, callback) => {
+    if (!recibo.cantidad) return callback('manca la cantidad');
+    if (!recibo.documento) return callback('manca il documento');
+    if (!recibo.responsable) return callback('manca il responsable');
+    if (!recibo.idcliente) return callback('manca il idcliente');
+    if (!recibo.paga_con) return callback('manca il paga_con');
+    if (!recibo.idcaja) return callback('manca il idcaja');
+    return callback(null, {
+        ok: true,
+        recibo
+    })
+
+}
 
 
 module.exports = {
@@ -163,5 +179,6 @@ module.exports = {
     getNombre,
     getUsuario,
     postUsuario,
-    deleteUsuario
+    deleteUsuario,
+    checkRecibo
 };

@@ -76,7 +76,7 @@ app.post('/pagos/:id', (req, res) => {
             }
 
 
-            let caja = new Caja(b.documento, fat, nombre, b.entrada, "", "", "", 0);
+            let caja = new Caja(b.documento, fat, nombre, b.cantidad, "", "", "", 0);
             console.log('caja', caja);
 
             funciones.postcaja(caja, factura.Saldo_Factura, (err, idcaja) => {
@@ -86,7 +86,7 @@ app.post('/pagos/:id', (req, res) => {
                         message: 'Error ' + err
                     });
                 }
-                let recibo = new Recibo(id, b.entrada, b.responsable, b.documento, idcaja, b.paga_con, factura.idcliente);
+                let recibo = new Recibo(id, b.cantidad, b.responsable, b.documento, idcaja, b.paga_con, factura.idcliente);
                 console.log('recibo', recibo);
 
                 funciones.postRecibo(recibo, idcaja, (err, reciboenviado) => {
@@ -109,6 +109,24 @@ app.post('/pagos/:id', (req, res) => {
         });
 
 
+    });
+});
+
+app.post('/recibo/:id', (req, res) => {
+    let id = req.params.id;
+    let body = req.body;
+    let recibo = new Recibo(id, body.cantidad, body.responsable, body.documento, body.idcaja, body.paga_con, body.idcliente);
+    funciones.checkRecibo(recibo, (err, resultado) => {
+        if (err) {
+            res.status(400).json({
+                err
+            });
+        } else {
+            res.status(200).json({
+                ok: true,
+                resultado
+            });
+        }
     });
 });
 
