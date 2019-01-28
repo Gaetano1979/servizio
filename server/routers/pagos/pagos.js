@@ -45,6 +45,29 @@ app.get('/pagos/:id', (req, res) => {
         }
     });
 });
+
+app.post('/check/:id', (req, res) => {
+    let cuerpo = req.body;
+    let recibo = {
+        cantidad: cuerpo.cantidad
+    };
+    funciones.checkRecibo(recibo, (err, data) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                recibo
+            });
+        } else {
+            return res.status(200).json({
+                ok: true,
+                data,
+                recibo
+            });
+        }
+    });
+
+
+});
 // ruta post por ingresar un recibo nuevo 
 app.post('/pagos/:id', (req, res) => {
     // recibe id factura
@@ -55,7 +78,7 @@ app.post('/pagos/:id', (req, res) => {
         cantidad: b.cantidad,
         responsable: b.responsable,
         paga_con: b.paga_con,
-    }
+    };
 
     funciones.getTot(id, (err, factura) => {
         if (err) {

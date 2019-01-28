@@ -155,21 +155,48 @@ let postUsuario = (cuerpo, callback) => {
     });
 };
 let checkRecibo = (recibo, callback) => {
-    // if (!recibo.cantidad) return callback('manca la cantidad');
-    // if (!recibo.documento) return callback('manca il documento');
-    // if (!recibo.responsable) return callback('manca il responsable');
-    // if (!recibo.idcliente) return callback('manca il idcliente');
-    // if (!recibo.paga_con) return callback('manca il paga_con');
-    // if (!recibo.idcaja) return callback('manca il idcaja');
-    return callback(null, {
-        ok: true,
-        recibo
-    });
+
+    if (!recibo.cantidad) return callback('manca la cantidad');
+    if (!recibo.documento) return callback('manca il documento');
+    if (!recibo.responsable) return callback('manca il responsable');
+    if (!recibo.idcliente) return callback('manca il idcliente');
+    if (!recibo.paga_con) return callback('manca il paga_con');
+    if (!recibo.idcaja) {
+
+        return callback('manca il idcaja');
+
+
+    } else {
+        return callback(null, {
+            ok: true,
+            recibo
+        });
+    }
 
 };
+let recibo = {
+    cantidad: 20,
+    documento: 233,
+    responsable: "Sede",
+    idcliente: 13,
+    paga_con: "Contado",
+    idcaja: 23
+};
+// checkRecibo(recibo, (err, data) => {
+//     if (err) {
+//         console.log(err);
+
+//     } else {
+//         console.log(data);
+
+//     }
+
+
+// });
 
 
 module.exports = {
+    checkRecibo,
     get_factura,
     get_recibos,
     getTot,
@@ -179,5 +206,5 @@ module.exports = {
     getUsuario,
     postUsuario,
     deleteUsuario,
-    checkRecibo
+
 };
