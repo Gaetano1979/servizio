@@ -55,6 +55,7 @@ app.post('/check/:id', (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
+                err,
                 recibo
             });
         } else {
