@@ -120,36 +120,4 @@ app.post('/pagos/:id', (req, res) => {
 
     });
 });
-
-app.post('/recibo', (req, res) => {
-    // let id = req.params.id;
-    let body = req.body;
-    let id = body.id;
-    // let recibo = new Recibo(body.id, body.cantidad, body.responsable, body.documento, body.idcaja, body.paga_con, body.idcliente);
-    let recibo = {
-        id,
-        documento: body.documento
-    };
-    res.json({
-        recibo
-    });
-    // funciones.checkRecibo(recibo, (err, resultado) => {
-    //     if (err) {
-    //         res.status(400).json({
-    //             err
-    //         });
-    //     } else {
-    //         res.status(200).json({
-    //             ok: true,
-    //             resultado,
-    //             recibo,
-    //             body
-    //         });
-    //     }
-    // });
-});
-
-
-
-
 module.exports = app;
