@@ -145,13 +145,24 @@ let getUsuario = (query, callback) => {
     });
 };
 
-let postUsuario = (usuario, callback) => {
+let postUsuario = (cuerpo, callback) => {
+    let secondo = {
+        nombre: cuerpo.nombre,
+        prova: cuerpo.prova
+    }
+
+    let usuario = {
+        nombre: cuerpo.nombre,
+        apellido: cuerpo.apellido,
+        roule: cuerpo.roule,
+        fecha: cuerpo.fecha
+    }
 
     mysql.conessione.query(`insert into usuario set ?`, usuario, (err, result) => {
         if (err) {
             return callback('Error ', err);
         } else {
-            return callback(null, result);
+            return callback(null, { result, usuario, secondo });
         }
     });
 };
