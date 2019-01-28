@@ -162,7 +162,7 @@ let postUsuario = (cuerpo, callback) => {
         if (err) {
             return callback('Error ', err);
         } else {
-            return callback(null, { result, usuario, secondo });
+            return callback(null, { result });
         }
     });
 };
