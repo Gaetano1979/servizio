@@ -47,16 +47,16 @@ app.get('/pagos/:id', (req, res) => {
 });
 
 app.post('/check/:id', (req, res) => {
-let cuerpo = req.body;
-let recibo = {
-    cantidad: cuerpo.cantidad,
-    documento: cuerpo.documento,
-    responsable: cuerpo.responsable,
-    paga_con: cuerpo.paga_con,
-    idcaja: cuerpo.idcaja
+    let cuerpo = req.body;
+    let recibo = {
+        cantidad: cuerpo.cantidad,
+        documento: cuerpo.documento,
+        responsable: cuerpo.responsable,
+        paga_con: cuerpo.paga_con,
+        idcaja: cuerpo.idcaja
 
-};
-funciones.checkRecibo(recibo, (err, data) => {
+    };
+    funciones.checkRecibo(recibo, (err, data) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -69,18 +69,23 @@ funciones.checkRecibo(recibo, (err, data) => {
             //     data,
             mysql.conessione.query(`insert into pagos set ?`, recibo, (err, data) => {
                 if (err) {
-                    return callback('Error post recibo', err);
+                    return res.status(400).json({
+                        ok: false,
+                        err,
+                        recibo
+                    });
                 } else {
-                    return callback(null, data);
+                    return res.status(200).json({
+                        ok: true,
+                        data
+                    });
                 }
             });
+        }
 
-        });
-}
+    });
 });
 
-
-});
 // ruta post por ingresar un recibo nuevo 
 app.post('/pagos/:id', (req, res) => {
     // recibe id factura
