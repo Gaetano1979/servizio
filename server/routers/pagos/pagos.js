@@ -53,7 +53,8 @@ app.post('/check/:id', (req, res) => {
         documento: cuerpo.documento,
         responsable: cuerpo.responsable,
         paga_con: cuerpo.paga_con,
-        idcaja: cuerpo.idcaja
+        idcaja: cuerpo.idcaja,
+        idfactura: cuerpo.idfactura
 
     };
     funciones.checkRecibo(recibo, (err, data) => {
