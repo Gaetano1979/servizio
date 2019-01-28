@@ -168,7 +168,7 @@ let checkRecibo = (recibo, callback) => {
 
     } else {
         return callback(null, {
-            ok: true,
+
             recibo
         });
     }

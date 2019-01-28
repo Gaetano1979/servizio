@@ -65,9 +65,9 @@ app.post('/check/:id', (req, res) => {
             });
         } else {
             return res.status(200).json({
-
+                ok: true,
                 data,
-                recibo
+
             });
         }
     });
