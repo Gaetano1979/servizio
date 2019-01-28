@@ -50,7 +50,9 @@ app.post('/check/:id', (req, res) => {
     let cuerpo = req.body;
     let recibo = {
         cantidad: cuerpo.cantidad,
-        documento: cuerpo.documento
+        documento: cuerpo.documento,
+        responsable: cuerpo.responsable,
+        paga_con: cuerpo.paga_con
     };
     funciones.checkRecibo(recibo, (err, data) => {
         if (err) {
