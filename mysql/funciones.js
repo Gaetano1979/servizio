@@ -164,7 +164,7 @@ let checkRecibo = (recibo, callback) => {
     if (!recibo.idcaja) {
         return callback('manca il idcaja');
     } else {
-        return callback(null, recibo)
+        return callback(null, recibo);
     }
 
 };

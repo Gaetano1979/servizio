@@ -59,7 +59,7 @@ app.post('/check/:id', (req, res) => {
         idcliente: cuerpo.idcliente
 
     };
-    funciones.checkRecibo(recibo, (err, data) => {
+    funciones.checkRecibo(recibo, (err, recivo_env) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -68,7 +68,7 @@ app.post('/check/:id', (req, res) => {
             });
         } else {
 
-            mysql.conessione.query(`insert into pagos set ?`, recibo, (err, data1) => {
+            mysql.conessione.query(`insert into pagos set ?`, recibo, (err, conferma) => {
                 if (err) {
                     return res.status(400).json({
                         ok: false,
@@ -78,8 +78,8 @@ app.post('/check/:id', (req, res) => {
                 } else {
                     return res.status(200).json({
                         ok: true,
-                        data1,
-                        data
+                        recivo_env,
+                        conferma
                     });
                 }
             });
