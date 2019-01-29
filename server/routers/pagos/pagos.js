@@ -45,6 +45,24 @@ app.get('/pagos/:id', (req, res) => {
         }
     });
 });
+app.delete('/pagos/:id', (req, res) => {
+    let id = req.params.id;
+    funciones.deleteRecibo(id, (err, data) => {
+        if (err) {
+            return status(400).json({
+                ok: false,
+                message: 'Problemas en cancelar el recibo',
+                err
+            });
+        } else {
+            res.status(200).json({
+                ok: true,
+                message: 'Recibo cancelado',
+                data
+            });
+        }
+    });
+});
 
 app.post('/check/:id', (req, res) => {
     let cuerpo = req.body;

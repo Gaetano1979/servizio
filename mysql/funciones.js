@@ -35,6 +35,17 @@ let deleteUsuario = (id, callback) => {
         }
     });
 };
+let deleteRecibo = (id, callback) => {
+    mysql.conessione.query(`delete from pagos where idpago=${id}`, (err, data) => {
+
+        if (err) {
+            return callback('Error ', err);
+        } else {
+            return callback(null, data);
+        }
+    });
+};
+
 let get_recibos = (idfattura, callback) => {
     let query = `select *from pagos where pagos.idfactura=${idfattura}`;
     mysql.conessione.query(query, (err, recibos) => {
@@ -200,5 +211,6 @@ module.exports = {
     getUsuario,
     postUsuario,
     deleteUsuario,
+    deleteRecibo
 
 };
