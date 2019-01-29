@@ -5,7 +5,7 @@ const { Caja } = require('../clases/caja');
 
 
 let get_factura = (id, callback) => {
-    let query = `select *from ventas where ventas.idfactura=${id}`;
+    let query = `select * from ventas where ventas.idfactura=${id}`;
     if (!id) {
         return callback('Erorr en el Id');
     }
@@ -47,7 +47,7 @@ let deleteRecibo = (id, callback) => {
 };
 
 let get_recibos = (idfattura, callback) => {
-    let query = `select *from pagos where pagos.idfactura=${idfattura}`;
+    let query = `select * from pagos where pagos.idfactura=${idfattura}`;
     mysql.conessione.query(query, (err, recibos) => {
 
         if (err) {

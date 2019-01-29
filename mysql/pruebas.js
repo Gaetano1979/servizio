@@ -145,6 +145,33 @@ let prova1 = (callback) => {
     });
 };
 
+let buscar = (termino, callback) => {
+    mysql.conessione.query(`select * from clientes where cliente like '%${termino}%'`, (err, resultado) => {
+        if (err) {
+            return callback('Error ', err);
+        } else {
+            return callback(null, resultado);
+        }
+    });
+    mysql.conessione.query(`select * from ventas where documento like '%${termino}%'`, (err, resultado) => {
+        if (err) {
+            return callback('Error ', err);
+        } else {
+            return callback(null, resultado);
+        }
+    });
+};
+// buscar('rep', (err, resultado) => {
+//     if (err) {
+//         console.log(err);
+
+//     } else {
+//         console.log(resultado);
+
+//     }
+// })
+
 module.exports = {
-    prova1
+    prova1,
+    buscar
 };
