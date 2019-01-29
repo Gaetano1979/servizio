@@ -113,6 +113,7 @@ let MysqlGetDatosCliente2 = (id, callback) => {
                                 if (pagos.idfactura === element.idfactura) {
                                     pagamenti += pagos.cantidad;
                                     let ob = {
+                                        id: pagos.idpago,
                                         pago: pagos.cantidad,
                                         resposable: pagos.responsable,
                                         fecha: pagos.fecha_pag,
