@@ -159,18 +159,12 @@ let checkRecibo = (recibo, callback) => {
     if (!recibo.cantidad) return callback('manca la cantidad');
     if (!recibo.documento) return callback('manca il documento');
     if (!recibo.responsable) return callback('manca il responsable');
-    // if (!recibo.idcliente) return callback('manca il idcliente');
+    if (!recibo.idcliente) return callback('manca il idcliente');
     if (!recibo.paga_con) return callback('manca il paga_con');
     if (!recibo.idcaja) {
-
         return callback('manca il idcaja');
-
-
     } else {
-        return callback(null, {
-
-            recibo
-        });
+        return callback(null, recibo)
     }
 
 };

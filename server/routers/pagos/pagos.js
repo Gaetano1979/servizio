@@ -67,10 +67,8 @@ app.post('/check/:id', (req, res) => {
                 recibo
             });
         } else {
-            // return res.status(200).json({
-            //     ok: true,
-            //     data,
-            mysql.conessione.query(`insert into pagos set ?`, recibo, (err, data) => {
+
+            mysql.conessione.query(`insert into pagos set ?`, recibo, (err, data1) => {
                 if (err) {
                     return res.status(400).json({
                         ok: false,
@@ -80,6 +78,7 @@ app.post('/check/:id', (req, res) => {
                 } else {
                     return res.status(200).json({
                         ok: true,
+                        data1,
                         data
                     });
                 }
