@@ -146,19 +146,25 @@ let prova1 = (callback) => {
 };
 
 let buscar = (termino, callback) => {
-    mysql.conessione.query(`select * from clientes where cliente like '%${termino}%'`, (err, resultado) => {
-        if (err) {
+    mysql.conessione.query(`select * from clientes where cliente like '%${termino}%'`, (err, nome) => {
+        if (err)
             return callback('Error ', err);
-        } else {
-            return callback(null, resultado);
-        }
-    });
-    mysql.conessione.query(`select * from ventas where documento like '%${termino}%'`, (err, resultado) => {
-        if (err) {
-            return callback('Error ', err);
-        } else {
-            return callback(null, resultado);
-        }
+
+
+
+
+        mysql.conessione.query(`select * from ventas where documento like '%${termino}%'`, (err, fattura) => {
+
+            if (err) {
+                return callback('Error ', err);
+            } else {
+                return callback(null, {
+                    nome,
+                    fattura
+                });
+            }
+        });
+
     });
 };
 // buscar('rep', (err, resultado) => {
