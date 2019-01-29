@@ -150,19 +150,24 @@ let buscar = (termino, callback) => {
         if (err)
             return callback('Error ', err);
 
+        mysql.conessione.query(`select * from pagos where documento like '%${termino}%' `, (err, pago) => {
 
-
-
-        mysql.conessione.query(`select * from ventas where documento like '%${termino}%'`, (err, fattura) => {
-
-            if (err) {
+            if (err)
                 return callback('Error ', err);
-            } else {
-                return callback(null, {
-                    nome,
-                    fattura
-                });
-            }
+
+
+            mysql.conessione.query(`select * from ventas where documento like '%${termino}%'`, (err, fattura) => {
+
+                if (err) {
+                    return callback('Error ', err);
+                } else {
+                    return callback(null, {
+                        nome,
+                        fattura,
+                        pago
+                    });
+                }
+            });
         });
 
     });
