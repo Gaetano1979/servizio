@@ -172,15 +172,42 @@ let buscar = (termino, callback) => {
 
     });
 };
-// buscar('rep', (err, resultado) => {
-//     if (err) {
-//         console.log(err);
 
-//     } else {
-//         console.log(resultado);
+let update = (modifica, callback) => {
 
-//     }
-// })
+    mysql.conessione.query(`UPDATE usuario SET nombre=?,apellido=? where idusuario=?`, [modifica[0], modifica[1], modifica[2]], (err, result) => {
+        if (err) {
+            return callback('Error ', err);
+        } else {
+            return callback(null, result);
+        }
+
+    });
+}
+
+
+
+
+let prova = ['Silverio', "", 22];
+update(prova, (err, result) => {
+    console.log(prova);
+
+
+    if (err) {
+        console.log({
+            err,
+            prova
+        });
+
+
+    } else {
+        console.log({
+            message: 'Update riuscito',
+            result
+        });
+
+    }
+});
 
 module.exports = {
     prova1,
