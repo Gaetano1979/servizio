@@ -86,7 +86,7 @@ let prova1 = (callback) => {
         if (err) return callback(err);
         mysql.conessione.query(`select * from pagos`, (err, pagos) => {
             if (err) return callback(err);
-            if (pagos.length === 0) return callback('No hay cobranza por este cliente');
+            // if (pagos.length === 0) return callback('No hay cobranza por este cliente');
             mysql.conessione.query(`select * from ventas`, (err, fatturas) => {
                 if (err) return callback(err);
                 if (fatturas.length === 0) return callback('No hay fatturas por este cliente');
