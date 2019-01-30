@@ -152,12 +152,12 @@ let MysqlGetDatosCliente2 = (id, callback) => {
                             arrDoc.push(Doc);
                         });
 
-                        if (pagamenti_cliente.length === 0) {
-                            return callback('no hay cobranza por este cliente');
-                        } else {
-                            return callback(null, arrDoc);
+                        // if (pagamenti_cliente.length === 0) {
+                        //     return callback('no hay cobranza por este cliente');
+                        // } else {
+                        return callback(null, arrDoc);
 
-                        }
+                        // }
                     });
                 }
 
