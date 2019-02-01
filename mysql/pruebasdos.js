@@ -142,7 +142,9 @@ let MysqlGetDatosCliente2 = (id, callback) => {
                                     nota_cre.push(notas);
                                 }
                             });
-                            let SaldoTot = (element.total - pagamenti - element.inicial);
+                            // let SaldoTot = (element.total - pagamenti - element.inicial);
+                            let SaldoTot = (element.total - pagamenti);
+
                             Doc = {
                                 Saldo: Number(SaldoTot.toFixed(2)),
                                 Id_Factura: element.idfactura,
