@@ -133,6 +133,13 @@ let prova1 = (callback) => {
                         ciudad: cl.ciudad,
                         zona: cl.zona,
                         direccion: cl.direccion,
+                        telefono: cl.telefono1,
+                        telefono_ax: cl.telefono2,
+                        cellulare: cl.celular,
+                        correo: cl.email,
+                        vendedor: cl.vendedor,
+                        Ruc: cl.ruc,
+                        Dni: cl.dni,
                         fatturas: fatt,
                         pagamenti: pag
                     };
