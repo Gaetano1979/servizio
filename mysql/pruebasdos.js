@@ -63,7 +63,8 @@ let prova1 = (callback) => {
 
                         res = {
                             id: cl.idcliente,
-                            saldo: Number((tot - iniz - patot).toFixed(2)),
+                            // saldo: Number((tot - iniz - patot).toFixed(2)),
+                            saldo: Number(tot - patot),
                             comp_tot: Number(tot.toFixed(2)),
                             pagoTot: Number(patot.toFixed(2)),
                             inicial: Number(iniz.toFixed(2)),
