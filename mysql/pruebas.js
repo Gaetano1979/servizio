@@ -190,7 +190,7 @@ let update = (modifica, callback) => {
         }
 
     });
-}
+};
 
 
 
