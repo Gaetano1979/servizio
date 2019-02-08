@@ -3,6 +3,8 @@ const app = express();
 
 // dependencia pdf
 const pdf = require('html-pdf');
+// dependencia fs
+const fs = require('fs');
 
 const nodemailer = require('nodemailer');
 
@@ -63,17 +65,18 @@ app.post('/email', (req, res) => {
 
     let prova = req.body;
     let cliente = prova.cliente;
-    let provapdf =
-        `<body style="">
-            <div style="text-align: center">
-                <h1 style="color:blue">Prova Recibo</h1>
-            </div>
-            <div>
-                <h4>Cliente</h4>
-            </div>
-        </body>`;
+    // let provapdf =
+    //     `<body style="">
+    //         <div style="text-align: center">
+    //             <h1 style="color:blue">Prova Recibo</h1>
+    //         </div>
+    //         <div>
+    //             <h4>Cliente</h4>
+    //         </div>
+    //     </body>`;
+    let html = fs.readFileSync('./html/prova.html', 'utf8');
     let opcion = {
-        'format': 'A4',
+        'format': 'Letter',
         'header': {
             'heigth': '60px',
         },
@@ -82,7 +85,7 @@ app.post('/email', (req, res) => {
         },
 
     };
-    pdf.create(provapdf, opcion).toFile('./pdf/prova.pdf', (err, respuesta) => {
+    pdf.create(html, opcion).toFile('./pdf/prova.pdf', (err, respuesta) => {
         if (err) {
             console.log(err);
 
