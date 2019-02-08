@@ -81,8 +81,8 @@ app.post('/email', (req, res) => {
             'height': '22mm'
         },
 
-    }
-    pdf.create(provapdf, opcion).toFile('../../pdf/prova.pdf', (err, respuesta) => {
+    };
+    pdf.create(provapdf, opcion).toFile('./pdf/prova.pdf', (err, respuesta) => {
         if (err) {
             console.log(err);
 
@@ -108,7 +108,7 @@ app.post('/email', (req, res) => {
             recipient: prova.from
         },
         attachments: [{
-            path: '../../pdf/prova.pdf'
+            path: './pdf/prova.pdf'
         }]
     };
 
