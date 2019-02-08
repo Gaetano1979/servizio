@@ -1,140 +1,97 @@
-const express = require('express');
-const app = express();
-
-// dependencia pdf
-const pdf = require('html-pdf');
-// dependencia fs
-const fs = require('fs');
-
+// const configurazione = require('./config');
 const nodemailer = require('nodemailer');
 
 
-
-const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'gaetano.sabino@gmail.com',
-        pass: 'Francy@2015'
-    }
-});
-const transporter1 = nodemailer.createTransport({
-    service: 'register',
-    auth: {
-        user: 'gaetano@cosmeticsfromitaly.com',
-        pass: 'Unico@2016'
-    }
-});
-
-const mailOption = {
-    from: 'Remitente',
-    to: 'gaetano@cosmeticsfromitaly.com',
-    subject: 'prova nodamail',
-    // text: 'Prva envio correo con node'
-};
-const transporter2 = nodemailer.createTransport({
-    host: "authsmtp.securemail.pro",
-    port: 465,
-    secure: true, // use TLS
-    auth: {
-        user: "gaetano@cosmeticsfromitaly.com",
-        pass: "Unico@2016"
-    },
-    tls: {
-        // do not fail on invalid certs
-        rejectUnauthorized: true
-    }
-});
-
-let message = {
-    from: 'sender@example.com',
-    to: 'recipient@example.com',
-    subject: 'Message',
-    text: 'I hope this message gets read!',
-    dsn: {
-        id: 'some random message specific id',
-        return: 'headers',
-        notify: ['failure', 'delay'],
-        recipient: 'sender@example.com'
-    }
-};
-
-
-
+const express = require('express');
+const app = express();
 
 app.post('/email', (req, res) => {
+    let body = req.body;
+    let recibo = {
+        destinario: body.destinario,
+        subject: body.subject,
+        numero: body.numero,
+        cantidad: body.cantidad,
+        factura: body.factura,
+        responsable: body.responsable,
+        fecha: body.fecha
 
-    let prova = req.body;
-    let cliente = prova.cliente;
-    // let provapdf =
-    //     `<body style="">
-    //         <div style="text-align: center">
-    //             <h1 style="color:blue">Prova Recibo</h1>
-    //         </div>
-    //         <div>
-    //             <h4>Cliente</h4>
-    //         </div>
-    //     </body>`;
-    let html = fs.readFileSync('./html/prova.html', 'utf8');
-    let opcion = {
-        'format': 'Letter',
-        'header': {
-            'heigth': '60px',
-        },
-        'footer': {
-            'height': '22mm'
-        },
 
     };
-    pdf.create(html, opcion).toFile('./pdf/prova.pdf', (err, respuesta) => {
-        if (err) {
-            console.log(err);
-
-        } else {
-            console.log(respuesta);
-
-        }
-    });
-
-
-    let email = {
-        from: prova.from,
-        to: prova.to,
-        subject: prova.subject,
-        // text: prova.text
-        html: `<h1 style="text-center">Prova de html</h1>
-                <hr>
-                <p>Adesso possiamo metter un messagio </p>`,
-        dsn: {
-            id: 'some random message specific id',
-            return: 'headers',
-            notify: ['failure', 'delay'],
-            recipient: prova.from
+    const transporter2 = nodemailer.createTransport({
+        host: "authsmtp.securemail.pro",
+        port: 465,
+        secure: true, // use TLS
+        auth: {
+            user: "no_reply@cosmeticsfromitaly.com",
+            pass: "Unico@2016"
         },
-        attachments: [{
-            path: './pdf/prova.pdf'
-        }]
+        tls: {
+            // do not fail on invalid certs
+            rejectUnauthorized: true
+        }
+    });
+    // const mailOption = {
+    //     from: `${recibo.from}`,
+    //     to: `${recibo.to}`,
+    //     subject: `${recibo.subject}`,
+    //     html: `<h1>proviamo a mandare ${recibo.to}</h1>
+    //             <hr>
+    //             <p>La empresa Uni.co Commercial envia este correo como costancia de pago </p>
+    //             <p>
+    //             Recibo numero ${recibo.numero}, de S./  ${recibo.cantidad} pago a cuanta de la factuta n° ${recibo.factura}
+    //             </p>
+    //             <p>
+    //             responsable de cobrar el monto indicado arriva el segnor ${recibo.responsable}
+    //             </p>
+    //             <p>
+    //             Fecha: ${recibo.fecha}
+    //             </p>`
+    // };
+    const mailOption = {
+        from: `"Unico Commercial S.A.C"<no_reply@cosmeticsfromitaly.com>`,
+        to: body.to,
+        subject: body.subject,
+        text: body.text,
+        html: `<h1>proviamo a mandare ${body.to}</h1>
+                    <hr>
+                    <p>La empresa Uni.co Commercial envia este correo como costancia de pago </p>
+                    <p>
+                    Recibo numero ${body.numero}, de S./  ${body.cantidad} pago a cuanta de la factuta n° ${body.factura}
+                    </p>
+                    <p>
+                    responsable de cobrar el monto indicado arriva el segnor ${body.responsable}
+                    </p>
+                    <p>
+                    Fecha: ${body.fecha}
+                    </p>`
     };
-
-    // verify connection configuration
-    transporter2.verify(function(error, success) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("Server is ready to take our messages");
-        }
-    });
-
-
-    transporter2.sendMail(email, (err, info) => {
+    transporter2.sendMail(mailOption, (err, info) => {
         if (err) {
-            console.log(err);
-            res.status(500).jsonp(err.message);
+            res.status(500).jsonp({
+                Error: 'Error',
+                err
+            });
         } else {
-            console.log('Email enviado');
-            res.status(200).jsonp(info);
+            res.status(200).jsonp({
+                info
+            });
         }
     });
+
+
+
 });
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = app;
