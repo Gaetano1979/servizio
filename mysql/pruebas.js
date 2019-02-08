@@ -195,26 +195,26 @@ let update = (modifica, callback) => {
 
 
 
-let prova = ['Silverio', "", 22];
-update(prova, (err, result) => {
-    console.log(prova);
+// let prova = ['Silverio', "", 22];
+// update(prova, (err, result) => {
+//     console.log(prova);
 
 
-    if (err) {
-        console.log({
-            err,
-            prova
-        });
+//     if (err) {
+//         console.log({
+//             err,
+//             prova
+//         });
 
 
-    } else {
-        console.log({
-            message: 'Update riuscito',
-            result
-        });
+//     } else {
+//         console.log({
+//             message: 'Update riuscito',
+//             result
+//         });
 
-    }
-});
+//     }
+// });
 
 module.exports = {
     prova1,
