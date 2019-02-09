@@ -61,7 +61,7 @@ app.get('/clienteTot', (req, res) => {
 app.put('/cliente', (req, res) => {
     let cliente = req.body.cliente;
     // let prova = cliente.split(",");
-    clienteArray = [cliente[0], cliente[1], cliente[2], cliente[3]];
+    clienteArray = [cliente[0], cliente[1], cliente[2], cliente[3], cliente[4]];
     prova1.update(clienteArray, (err, resultado) => {
         if (err) {
             res.status(400).json('Error ', err);
