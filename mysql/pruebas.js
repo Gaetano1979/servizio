@@ -182,7 +182,7 @@ let buscar = (termino, callback) => {
 
 let update = (modifica, callback) => {
 
-    mysql.conessione.query(`UPDATE usuario SET nombre=?,apellido=? where idusuario=?`, [modifica[0], modifica[1], modifica[2]], (err, result) => {
+    mysql.conessione.query(`UPDATE clientes SET cliente=?,ciudad=?,zona=?,direccion=? where idcliente=?`, [modifica[0], modifica[1], modifica[2], modifica[3], modifica[4]], (err, result) => {
         if (err) {
             return callback('Error ', err);
         } else {
@@ -195,7 +195,7 @@ let update = (modifica, callback) => {
 
 
 
-// let prova = ['Silverio', "", 22];
+// let prova = ['Lima', "San Martin", 11];
 // update(prova, (err, result) => {
 //     console.log(prova);
 
@@ -218,5 +218,6 @@ let update = (modifica, callback) => {
 
 module.exports = {
     prova1,
-    buscar
+    buscar,
+    update
 };

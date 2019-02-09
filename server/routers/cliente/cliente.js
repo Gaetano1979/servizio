@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('../../../mysql/mysql');
 const prova = require('../../../mysql/pruebasdos');
+const prova1 = require('../../../mysql/pruebas');
 
 
 
@@ -56,6 +57,27 @@ app.get('/clienteTot', (req, res) => {
         }
 
     });
+});
+app.put('/cliente', (req, res) => {
+    let cliente = req.body.cliente;
+    // let prova = cliente.split(",");
+    clienteArray = [cliente[0], cliente[1], cliente[2], cliente[3]];
+    prova1.update(clienteArray, (err, resultado) => {
+        if (err) {
+            res.status(400).json('Error ', err);
+        } else {
+            res.status(200).json({
+                resultado,
+                clienteArray
+            });
+
+        }
+    });
+    // res.jsonp({
+    //     cliente
+    // });
+
+
 });
 
 
