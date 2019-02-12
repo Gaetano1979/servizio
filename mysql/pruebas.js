@@ -182,7 +182,7 @@ let buscar = (termino, callback) => {
 
 let update = (modifica, callback) => {
 
-    mysql.conessione.query(`UPDATE clientes SET cliente=?,ciudad=?,zona=?,direccion=? where idcliente=?`, [modifica[0], modifica[1], modifica[2], modifica[3]], modifica[7], (err, result) => {
+    mysql.conessione.query(`UPDATE clientes SET cliente=?,ciudad=?,zona=?,direccion=? where idcliente=?`, [modifica[0], modifica[1], modifica[2], modifica[3]], modifica[4], (err, result) => {
         if (err) {
             return callback('Error ', {
                 err,
