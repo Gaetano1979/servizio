@@ -184,7 +184,10 @@ let update = (modifica, callback) => {
 
     mysql.conessione.query(`UPDATE clientes SET cliente=?,ciudad=?,zona=?,direccion=? where idcliente=?`, [modifica[0], modifica[1], modifica[2], modifica[3]], modifica[7], (err, result) => {
         if (err) {
-            return callback('Error ', err);
+            return callback('Error ', {
+                err,
+                modifica
+            });
         } else {
             return callback(null, result);
         }
