@@ -76,7 +76,7 @@ app.post('/email', (req, res) => {
         to: recibo.email,
         cc: ['gaetano.sabino@gmail.com', 'gaetano@cosmeticsfromitaly.com'],
         subject: `Recibo de cobranza numero ${recibo.numero}`,
-        text: recibo,
+
         html: html,
         attachments: [{
             path: `./server/routers/email/pdf/${recibo.responsable}.${recibo.numero}.pdf`
