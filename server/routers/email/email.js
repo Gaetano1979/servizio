@@ -1,5 +1,9 @@
 // const configurazione = require('./config');
 const nodemailer = require('nodemailer');
+// dependencia pdf
+const pdf = require('html-pdf');
+// dependencia fs
+const fs = require('fs');
 
 
 const express = require('express');
@@ -8,15 +12,14 @@ const app = express();
 app.post('/email', (req, res) => {
     let body = req.body;
     let recibo = {
-        destinario: body.destinario,
+        destinatario: body.destinatario,
         subject: body.subject,
         numero: body.numero,
         cantidad: body.cantidad,
         factura: body.factura,
         responsable: body.responsable,
-        fecha: body.fecha
-
-
+        fecha: body.fecha,
+        email: body.email
     };
     const transporter2 = nodemailer.createTransport({
         host: "authsmtp.securemail.pro",
@@ -31,41 +34,50 @@ app.post('/email', (req, res) => {
             rejectUnauthorized: true
         }
     });
-    // const mailOption = {
-    //     from: `${recibo.from}`,
-    //     to: `${recibo.to}`,
-    //     subject: `${recibo.subject}`,
-    //     html: `<h1>proviamo a mandare ${recibo.to}</h1>
-    //             <hr>
-    //             <p>La empresa Uni.co Commercial envia este correo como costancia de pago </p>
-    //             <p>
-    //             Recibo numero ${recibo.numero}, de S./  ${recibo.cantidad} pago a cuanta de la factuta n° ${recibo.factura}
-    //             </p>
-    //             <p>
-    //             responsable de cobrar el monto indicado arriva el segnor ${recibo.responsable}
-    //             </p>
-    //             <p>
-    //             Fecha: ${recibo.fecha}
-    //             </p>`
-    // };
+
     const mailOption = {
         from: `"Unico Commercial S.A.C"<no_reply@cosmeticsfromitaly.com>`,
-        to: body.to,
-        subject: body.subject,
+        to: recibo.email,
+        cc: ['gaetano.sabino@gmail.com', 'gaetano@cosmeticsfromitaly.com'],
+        subject: `Recibo de cobranza numero ${recibo.numero}`,
         text: body.text,
-        html: `<h1>proviamo a mandare ${body.to}</h1>
+        html: `<h1>Recibo de cobranza a nombre de <small>${recibo.destinatario}</small></h1>
                     <hr>
-                    <p>La empresa Uni.co Commercial envia este correo como costancia de pago </p>
+                    <p>La empresa Uni.co Commercial S.A.C envia este correo como costancia de pago </p>
                     <p>
-                    Recibo numero ${body.numero}, de S./  ${body.cantidad} pago a cuanta de la factuta n° ${body.factura}
+                    Recibo numero ${recibo.numero}, de S./ ${recibo.cantidad} pago a cuenta por la factuta n° ${recibo.factura}
                     </p>
                     <p>
-                    responsable de cobrar el monto indicado arriva el segnor ${body.responsable}
+                    el responsable de cobrar el monto es el señor ${recibo.responsable}
                     </p>
                     <p>
-                    Fecha: ${body.fecha}
-                    </p>`
+                    Fecha: ${recibo.fecha}
+                    </p>`,
+        attachments: [{
+            path: `./pdf/${recibo.responsable}.${recibo.numero}.pdf`
+        }]
     };
+    let opcion = {
+        'format': 'Letter',
+        'header': {
+            'heigth': '5mm',
+        },
+        'footer': {
+            'height': '5mm'
+        },
+
+    };
+    pdf.create(mailOption.html, opcion).toFile(`./pdf/${recibo.responsable}.${recibo.numero}.pdf`, (err, respuesta) => {
+        if (err) {
+            console.log(err);
+
+        } else {
+            console.log(respuesta);
+
+        }
+    });
+
+
     transporter2.sendMail(mailOption, (err, info) => {
         if (err) {
             res.status(500).jsonp({
@@ -78,20 +90,5 @@ app.post('/email', (req, res) => {
             });
         }
     });
-
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = app;
