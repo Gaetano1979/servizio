@@ -99,7 +99,8 @@ app.post('/email', (req, res) => {
             });
         } else {
             res.status(200).jsonp({
-                info
+                info,
+                recibo
             });
         }
     });
