@@ -63,7 +63,7 @@ let email = (recibo, req, callback) => {
         text: 'prova envio',
         html: html,
         attachments: [{
-            path: `./server/routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`
+            path: `../server/routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`
         }]
     };
 
