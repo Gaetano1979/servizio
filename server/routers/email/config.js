@@ -47,7 +47,7 @@ let email = (recibo, req, callback) => {
         },
     };
 
-    pdf.create(html, opcion).toFile(`./server/routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`, (err, respuesta) => {
+    pdf.create(html, opcion).toFile(`../server/routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`, (err, respuesta) => {
         if (err) {
             console.log(err);
 
