@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const pdf = require('html-pdf');
 // dependencia fs
 const fs = require('fs');
+const path = require('path');
 
 
 const transporter2 = nodemailer.createTransport({
@@ -47,7 +48,7 @@ let email = (recibo, req, callback) => {
         },
     };
 
-    pdf.create(html, opcion).toFile(`../server/routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`, (err, respuesta) => {
+    pdf.create(html, opcion).toFile(path.resolve(__dirname, `../../routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`), (err, respuesta) => {
         if (err) {
             console.log(err);
 
@@ -56,6 +57,7 @@ let email = (recibo, req, callback) => {
 
         }
     });
+    let email = path.resolve(__dirname, `../../routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`);
     const mailOption = {
         from: `"Uni.co Commercial S.A.C" <no_reply@cosmeticsfromitaly.com>`,
         to: `${recibo.destinario}`,
@@ -63,7 +65,7 @@ let email = (recibo, req, callback) => {
         text: 'prova envio',
         html: html,
         attachments: [{
-            path: `../server/routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`
+            path: email
         }]
     };
 
