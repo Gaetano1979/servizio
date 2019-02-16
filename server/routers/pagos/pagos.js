@@ -65,6 +65,7 @@ app.delete('/pagos/:id', (req, res) => {
 });
 
 app.post('/check/:id', (req, res) => {
+
     let cuerpo = req.body;
     let recibo = {
         cantidad: cuerpo.cantidad,
@@ -78,6 +79,9 @@ app.post('/check/:id', (req, res) => {
         // nombre: cuerpo.cliente
 
     };
+    console.log(cuerpo, 'recibo');
+    // console.log(recibo);
+
     funciones.checkRecibo(recibo, (err, recivo_env) => {
         if (err) {
             return res.status(400).json({

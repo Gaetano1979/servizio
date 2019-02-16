@@ -1,3 +1,5 @@
+const express = require('express');
+const app = express();
 // const configurazione = require('./config');
 const nodemailer = require('nodemailer');
 // dependencia pdf
@@ -7,9 +9,55 @@ const fs = require('fs');
 
 let pathpath = require('path');
 
+const config = require('./config');
 
-const express = require('express');
-const app = express();
+app.post('/emailsend', (req, res) => {
+    let body = req.body;
+
+    console.log(req.body);
+
+    res.json({
+        res: body
+    });
+});
+
+
+
+app.post('/emailprova', (req, res) => {
+
+    let reciboemail = req.body;
+    let recibo = {
+        destinario: reciboemail.destinario,
+        subject: reciboemail.subject,
+        fattura: reciboemail.fattura,
+        fecha_pag: reciboemail.fecha_pag,
+        responsable: reciboemail.responsable,
+        cliente: reciboemail.cliente,
+        documento: reciboemail.documento,
+        cantidad: reciboemail.cantidad
+    };
+    console.log(reciboemail, 'email');
+
+
+    console.log(recibo);
+
+
+    config.email(recibo, req, (err, email) => {
+        if (err) {
+            res.json({
+                err,
+                recibo
+            });
+        } else {
+            res.json({
+                ok: true,
+                email
+
+            });
+        }
+    });
+
+});
 
 app.post('/email', (req, res) => {
     let body = req.body;
@@ -37,6 +85,10 @@ app.post('/email', (req, res) => {
             rejectUnauthorized: false
         }
     });
+    let prova = (recibo) => {
+        console.log(recibo);
+    };
+    prova(recibo);
 
     let html = `<h1>Recibo de cobranza a nombre de <small>${recibo.destinatario}</small></h1>
     <hr>
@@ -82,14 +134,6 @@ app.post('/email', (req, res) => {
             path: `./server/routers/email/pdf/${recibo.responsable}.${recibo.numero}.pdf`
         }]
     };
-
-
-
-
-
-
-
-
 
     transporter2.sendMail(mailOption, (err, info) => {
         if (err) {
