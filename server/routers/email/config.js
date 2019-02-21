@@ -158,8 +158,8 @@ let email = (recibo, req, callback) => {
         </tr>
         <tr>
             <td>${recibo.fattura}</td>
-            <td>${recibo.Saldo}</td>
-            <td>${recibo.monto}</td>
+            <td>${recibo.saldo}</td>
+            <td>${recibo.candidad}</td>
             <td>${recibo.Saldo - recibo.monto}</td>
         </tr>
     </table>
