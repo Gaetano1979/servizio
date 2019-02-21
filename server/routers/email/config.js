@@ -166,7 +166,7 @@ let email = (recibo, req, callback) => {
 </div>
 <div>
     <label for="">Observacione</label>
-    <p>${recibo.observacione}</p>
+    <p>${recibo.observaciones}</p>
 </div>
 
 
