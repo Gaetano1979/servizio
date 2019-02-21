@@ -13,6 +13,7 @@ app.use(require('./caja/caja.js'));
 app.use(require('./usuario/usuario.js'));
 app.use(require('./buscar/buscar.js'));
 app.use(require('./email/email.js'));
+app.use(require('./comentarios/com.js'));
 
 
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recibo de cobranza</title>
+    <style>
+        html,
+        body {
+            margin: 20px;
+            padding: 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-style: oblique;
+            background: rgba(241, 241, 241, 241);
+            -webkit-print-color-adjust: exact;
+            box-sizing: border-box;
+        }
+        
+        .lista {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 5px;
+        }
+        
+        img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        h2 {
+            text-align: center;
+            border-bottom: solid 0.2px black;
+            margin-left: 5px;
+            margin-top: 5px;
+        }
+        
+        .testa {
+            display: -webkit-flex;
+        }
+        
+        .left {
+            text-align: right;
+            width: 50%;
+            right: 0;
+        }
+        
+        .right {
+            width: 50%;
+        }
+        
+        ul {
+            margin-top: 0;
+            padding-left: 5px;
+            list-style-type: none;
+        }
+        
+        .recibo {
+            min-height: 300px;
+            margin-top: 2%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<div class="lista"><img src="../../../img/unico/logoUnico.png">
+    <ul>
+        <li>Unico Commercial S.A.C.</li>
+        <li>Calle Universitaria 524</li>
+        <li>Lima</li>
+        <li>San Miguel</li>
+        <li>Ruc: 20557749196</li>
+
+    </ul>
+</div>
+
+<div>
+    <h2>Recibo de Cobranza</h2>
+</div>
+<div class="testa">
+    <ul class="right">
+        <li>Vendedor: {{recibo.responsable}}</li>
+        <li>Districto: {{recibo.zona}}</li>
+        <li>Cliente: {{recibo.cliente}}</li>
+    </ul>
+    <table class="left">
+        <tr>
+            <th>Recibo de cobranza</th>
+        </tr>
+        <tr>
+            <td>{{recibo.documento}}</td>
+        </tr>
+    </table>
+    <!-- <ul>Recibo numero {{recibo.documento}}
+        <li>{{recibo.documento}}</li>
+        ul
+    </ul> -->
+
+</div>
+<div class="recibo">
+    <table>
+        <tr>
+            <th>Factura</th>
+            <th>Saldo</th>
+            <th>Deposito</th>
+            <th>Nuevo Saldo</th>
+        </tr>
+        <tr>
+            <td>{{recibo.fattura}}</td>
+            <td>{{recibo.Saldo}}</td>
+            <td>{{recibo.monto}}</td>
+            <td>{{recibo.Saldo - recibo.monto}}</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <label for="">Observacione</label>
+    <p>{{recibo.observacione}}</p>
+</div>
+
+
+<body>
+
+</body>
+
+</html>
