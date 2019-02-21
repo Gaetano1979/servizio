@@ -35,7 +35,8 @@ app.post('/emailprova', (req, res) => {
         cliente: reciboemail.cliente,
         documento: reciboemail.documento,
         cantidad: reciboemail.cantidad,
-        saldo: reciboemail.saldo
+        saldo: reciboemail.saldo,
+        zona: reciboemail.zona
     };
     console.log(reciboemail, 'email');
 
