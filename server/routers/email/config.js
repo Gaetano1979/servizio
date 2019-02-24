@@ -34,21 +34,6 @@ let email = (recibo, req, callback) => {
         }
     });
 
-
-    // const html = `<body>
-    // <h1>Estimado <small>${recibo.cliente}</small> </h1>
-    // <hr>
-    // <p>La empresa Uni.co Commercial envia este correo como costancia de pago </p>
-    // <p>
-    // Recibo numero ${recibo.documento}, de S./  ${recibo.cantidad} pago a cuanta de la factuta n° ${recibo.fattura}
-    // </p>
-    // <p>
-    // responsable de cobrar el monto indicado arriva el segnor ${recibo.responsable}
-    // </p>
-    // <p>
-    // Fecha: ${recibo.fecha_pag}
-    // </p>    
-    // </body>`;
     const html = `
     <!DOCTYPE html>
 <html lang="en">
@@ -175,16 +160,6 @@ let email = (recibo, req, callback) => {
 
 </html>`;
 
-    // let opcion = {
-    //     'format': 'Letter',
-    //     'header': {
-    //         'heigth': '5mm',
-    //     },
-    //     'footer': {
-    //         'height': '5mm'
-    //     },
-    // };
-
     pdf.create(html).toFile(path.resolve(__dirname, `../../routers/email/pdf/${recibo.responsable}.${recibo.documento}.pdf`), (err, respuesta) => {
         if (err) {
             console.log(err);
@@ -198,6 +173,9 @@ let email = (recibo, req, callback) => {
     const mailOption = {
         from: `"Uni.co Commercial S.A.C" <no_reply@cosmeticsfromitaly.com>`,
         to: `${recibo.destinario}`,
+        cc: [`"Gaetano Commercial" <gaetano@cosmeticsfromitaly.com>`,
+            `"Gaetano" <gaetano.sabino@gmail.com>`
+        ],
         subject: `${recibo.subject}`,
         text: 'prova envio',
         html: html,
