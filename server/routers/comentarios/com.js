@@ -14,7 +14,7 @@ app.get('/comentarios', (req, res) => {
         } else {
             return res.status(200).json(resultado);
         }
-    })
+    });
 
 });
 
@@ -24,14 +24,17 @@ app.post('/comentarios/:id', (req, res) => {
     let comentario = {
         comentario: com.comentario,
         idcliente: id,
-        fecha_comentario: com.fecha
-
+        fecha_comentario: com.fecha,
+        idrecibo: com.idrecibo,
+        idfactura: com.idfactura
     };
     let query = `
     insert into comentarios set ?`;
-    console.log(comentario);
 
     mysql.conessione.query(`${query}`, comentario, (err, resultado) => {
+
+        console.log(com);
+
         if (err) {
             res.status(400).json({
                 ok: false,
@@ -40,10 +43,11 @@ app.post('/comentarios/:id', (req, res) => {
         } else {
             res.status(200).json({
                 ok: true,
-                resultado
-            })
+                resultado,
+                comentario
+            });
         }
-    })
+    });
 });
 
 

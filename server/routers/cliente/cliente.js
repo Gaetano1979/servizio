@@ -43,7 +43,7 @@ app.get('/getclientes', (req, res) => {
             err
 
         });
-    })
+    });
 });
 
 app.get('/getcliente/:id', (req, res) => {
@@ -51,10 +51,10 @@ app.get('/getcliente/:id', (req, res) => {
     clientes.GetCliente(id).then(cliente => {
         clientes.GetFacturas(cliente).then(data => {
 
+
             res.status(200).json({
                 ok: true,
                 data
-
             });
         });
     }).catch(err => {

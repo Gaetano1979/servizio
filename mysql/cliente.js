@@ -51,11 +51,11 @@ let GetFacturas = (cliente) => {
             let nuevo = [];
             let anniFatturas = [];
             anni.forEach(anno => {
-                console.log(anno);
+                // console.log(anno);
                 nuevo = facturas.filter(factura => {
                     return (new Date(factura.fecha).getFullYear()) === anno;
                 });
-                console.log({ anno, nuevo });
+                // console.log({ anno, nuevo });
                 objet = {
                     facturaN: nuevo.length,
                     anno: anno,
@@ -73,7 +73,6 @@ let GetFacturas = (cliente) => {
                 anni: anni,
                 annifacturas: anniFatturas,
                 cliente,
-                nuevo,
                 facturas
             });
         });
