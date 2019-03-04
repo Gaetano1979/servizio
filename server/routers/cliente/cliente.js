@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('../../../mysql/mysql');
 const prova = require('../../../mysql/pruebasdos');
 const prova1 = require('../../../mysql/pruebas');
+const clientes = require('../../../mysql/cliente');
 
 
 
@@ -26,6 +27,52 @@ app.get('/cliente', (req, res) => {
             });
         }
     });
+});
+app.get('/getclientes', (req, res) => {
+
+    clientes.GetClientes().then((clientes) => {
+
+        res.status(200).json({
+            ok: true,
+            clientes
+        });
+    }).catch((err) => {
+
+        res.status(400).json({
+            ok: false,
+            err
+
+        });
+    })
+});
+
+app.get('/getcliente/:id', (req, res) => {
+    let id = req.params.id;
+    clientes.GetCliente(id).then(cliente => {
+        clientes.GetFacturas(cliente).then(data => {
+
+            res.status(200).json({
+                ok: true,
+                data
+
+            });
+        });
+    }).catch(err => {
+        res.status(400).json({
+            ok: false,
+            err
+        });
+    });
+});
+
+app.get('/clientesfacturas/:id', (req, res) => {
+    let id = req.params.id;
+    clientes.GetClienteFacturas(id).then(data => {
+        res.status(200).json({
+            ok: true,
+            data
+        });
+    }).catch(err => res.status(400).json({ ok: false, err }));
 });
 // ruta del cliente con id especifico
 app.get('/cliente/:id', (req, res) => {

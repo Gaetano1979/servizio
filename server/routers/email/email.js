@@ -37,7 +37,7 @@ app.post('/emailprova', (req, res) => {
         cantidad: reciboemail.cantidad,
         saldo: reciboemail.saldo,
         zona: reciboemail.zona,
-        observaciones: reciboemail.observaciones || 'No hay ningun observacion'
+        observaciones: reciboemail.observaciones || 'No hay observaciones'
     };
     console.log(reciboemail, 'email');
 
