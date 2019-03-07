@@ -1,4 +1,3 @@
-const Mysql = require('mysql');
 const mysql = require('./mysql');
 
 

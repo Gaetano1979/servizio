@@ -19,6 +19,35 @@ let GetClientes = () => {
     });
 };
 
+let GetTablas = (tabla) => {
+
+    return new Promise((resolve, reject) => {
+        mysql.conessione.query(queryClientes.GetTabla(tabla), (err, resultado) => {
+            if (err) {
+                return reject(err);
+            } else {
+                return resolve(resultado);
+            }
+        });
+
+    });
+};
+let GetWhere = (tabla, where, parametro) => {
+    return new Promise((resolve, reject) => {
+        mysql.conessione.query(queryClientes.GetWhere(tabla, where, parametro), (err, resultado) => {
+            if (err) {
+                return reject(err);
+            } else {
+                if (resultado.length === 0) {
+                    return resolve('No hay Comentarios por este cliente');
+                } else {
+                    return resolve(resultado);
+                }
+            }
+        });
+    });
+};
+
 let GetCliente = (id) => {
     return new Promise((resolve, reject) => {
         mysql.conessione.query(queryClientes.GetWhere('clientes', 'idcliente', id), (err, cliente) => {
@@ -115,5 +144,7 @@ module.exports = {
     GetClientes,
     GetCliente,
     GetClienteFacturas,
-    GetFacturas
+    GetFacturas,
+    GetTablas,
+    GetWhere
 };

@@ -1,21 +1,26 @@
 const express = require('express');
 const app = express();
 const mysql = require('../../../mysql/mysql');
+const query = require('../../../mysql/querys');
+const fun = require('../../../mysql/cliente');
 
 const comentarios = require('../../../mysql/comentarios');
 
 app.get('/comentarios', (req, res) => {
-    let query = `
-    select * from comentarios `;
-
-    comentarios.Comentarios(query, (err, resultado) => {
-        if (err) {
-            return res.status(400).json(err);
-        } else {
-            return res.status(200).json(resultado);
-        }
+    fun.GetTablas('comentarios').then(resul => {
+        res.status(200).json(resul);
+    }).catch(error => {
+        res.status(400).json(error);
     });
+});
+app.get('/comentarios/:id', (req, res) => {
+    let id = req.params.id;
 
+    fun.GetWhere('comentarios', 'idcliente', id).then(resultado => {
+        res.status(200).json(resultado);
+    }).catch(err => {
+        res.status(400).json(err);
+    });
 });
 
 app.post('/comentarios/:id', (req, res) => {
@@ -49,19 +54,4 @@ app.post('/comentarios/:id', (req, res) => {
         }
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = app;
