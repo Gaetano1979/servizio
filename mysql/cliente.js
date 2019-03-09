@@ -38,11 +38,7 @@ let GetWhere = (tabla, where, parametro) => {
             if (err) {
                 return reject(err);
             } else {
-                if (resultado.length === 0) {
-                    return resolve('No hay Comentarios por este cliente');
-                } else {
-                    return resolve(resultado);
-                }
+                return resolve(resultado);
             }
         });
     });

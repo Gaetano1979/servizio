@@ -17,6 +17,7 @@ app.get('/comentarios/:id', (req, res) => {
     let id = req.params.id;
 
     fun.GetWhere('comentarios', 'idcliente', id).then(resultado => {
+
         res.status(200).json(resultado);
     }).catch(err => {
         res.status(400).json(err);
